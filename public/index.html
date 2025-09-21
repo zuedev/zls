@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zls - A blazingly fast ls replacement</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        color: #e0e0e0;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        max-width: 800px;
+        padding: 2rem;
+        text-align: center;
+      }
+      h1 {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .tagline {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        color: #b0b0b0;
+      }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+      .feature {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      .cta {
+        margin: 2rem 0;
+      }
+      .btn {
+        display: inline-block;
+        padding: 12px 24px;
+        margin: 0 8px;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+      .btn-primary {
+        background: #4ecdc4;
+        color: #1a1a1a;
+      }
+      .btn-primary:hover {
+        background: #45b7d1;
+        transform: translateY(-2px);
+      }
+      .btn-secondary {
+        background: transparent;
+        color: #4ecdc4;
+        border: 2px solid #4ecdc4;
+      }
+      .btn-secondary:hover {
+        background: #4ecdc4;
+        color: #1a1a1a;
+      }
+      .code {
+        background: #0f0f0f;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem 0;
+        text-align: left;
+        font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+        font-size: 0.9rem;
+        color: #00ff00;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>zls</h1>
+      <p class="tagline">
+        ⚡ A blazingly fast <code>ls</code> replacement written in Rust
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Lightning Fast</h3>
+          <p>
+            Parallel processing for improved performance on large directories
+          </p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎨</div>
+          <h3>Colorized Output</h3>
+          <p>Beautiful file type indicators and syntax highlighting</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📏</div>
+          <h3>Cross Platform</h3>
+          <p>Works seamlessly on Linux, macOS, and Windows</p>
+        </div>
+      </div>
+
+      <pre class="code">
+$ zls --help
+A fast ls replacement written in Rust
+
+USAGE:
+    zls [OPTIONS] [PATH]
+
+OPTIONS:
+    -a, --all       Show hidden files
+    -l, --long      Use long listing format
+    -t, --time      Sort by modification time
+    -h, --human     Show human readable sizes
+        </pre
+      >
+
+      <div class="cta">
+        <a href="https://github.com/zuedev/zls/releases" class="btn btn-primary"
+          >Download</a
+        >
+        <a href="https://github.com/zuedev/zls" class="btn btn-secondary"
+          >View on GitHub</a
+        >
+      </div>
+    </div>
+  </body>
+</html>
