@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
   workflow_dispatch:
 
 env:
@@ -107,18 +107,3 @@ jobs:
               cd ..
             fi
           done
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            zls-linux-x86_64.tar.gz
-            zls-linux-x86_64-musl.tar.gz
-            zls-macos-x86_64.tar.gz
-            zls-macos-aarch64.tar.gz
-            zls-windows-x86_64.zip
-          draft: false
-          prerelease: false
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
