@@ -27,7 +27,12 @@ struct Args {
     #[arg(short, long, help = "Sort by modification time")]
     time: bool,
 
-    #[arg(short = 'H', long, help = "Show human readable sizes", default_value_t = true)]
+    #[arg(
+        short = 'H',
+        long,
+        help = "Show human readable sizes",
+        default_value_t = true
+    )]
     human: bool,
 
     #[arg(long, help = "Show raw byte sizes instead of human readable")]
