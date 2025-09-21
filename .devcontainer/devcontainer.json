@@ -1,0 +1,17 @@
+{
+  "name": "zls Rust Development",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "rust-lang.rust-analyzer",
+    "serayuzgur.crates",
+    "vadimcn.vscode-lldb"
+  ],
+  "forwardPorts": [],
+  "postCreateCommand": "cargo --version && rustc --version",
+  "remoteUser": "vscode"
+}

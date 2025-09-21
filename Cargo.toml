@@ -1,0 +1,16 @@
+[package]
+name = "zls"
+version = "0.1.0"
+edition = "2021"
+authors = ["zuedev"]
+description = "A fast ls replacement written in Rust"
+
+[[bin]]
+name = "zls"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+crossterm = "0.27"
+rayon = "1.7"
+chrono = { version = "0.4", features = ["serde"] }
