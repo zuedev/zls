@@ -2,34 +2,167 @@
 
 > ⚡ A blazingly fast `ls` replacement written in Rust
 
-**z**uedev's **ls** is a modern replacement for the `ls` command with a focus on speed and simplicity. It leverages parallel directory reading and provides colorized output with intuitive file type indicators.
+**zls** (zuedev's ls) is a modern, high-performance replacement for the traditional `ls` command. Built with Rust for speed and reliability, it features parallel directory processing, colorized output, and intuitive file type indicators.
 
 ## Features
 
-- 🚀 [**Fast directory listings**](src/main.rs#L113) - Parallel processing for improved performance
-- 🎨 [**Colorized output**](src/main.rs#L148-L156) - [File type indicators](src/main.rs#L146) and [syntax highlighting](src/main.rs#L148-L174)
-- 📋 [**Detailed by default**](src/main.rs#L142-L159) - Long format with file sizes and timestamps
-- 🔍 [**Flexible sorting**](src/main.rs#L126-L134) - Sort by name or modification time
-- 👁️ [**Hidden file support**](src/main.rs#L122-L124) - Show/hide dotfiles with `-a` flag
-- 📏 [**Human-readable sizes**](src/main.rs#L78-L97) - Convert bytes to KB/MB/GB with `-H` flag
-- 🖥️ **Cross-platform** - Linux, macOS, and Windows support
+- 🚀 **Parallel Processing** - Leverages Rayon for concurrent directory reading and improved performance
+- 🎨 **Colorized Output** - Visual file type indicators with syntax highlighting
+  - 📁 Directories (blue, bold)
+  - 🦀 Rust files (yellow)
+  - 👻 Hidden files (dark grey)
+- 📊 **Detailed View by Default** - Long format displaying file size, modification time, and type
+- 📏 **Smart Size Formatting** - Human-readable sizes (B/K/M/G/T) by default, with raw bytes option
+- 🕒 **Flexible Sorting** - Sort by name (default) or modification time
+- 👁️ **Hidden File Support** - Show/hide dotfiles with `-a` flag
+- 📱 **Responsive Layout** - Adapts short format to terminal width
+- 🖥️ **Cross-Platform** - Works on Linux, macOS, and Windows
 
 ## Installation
 
-Download the latest binary from the [releases page](https://github.com/zuedev/zls/releases) or build from source:
+### From Source
 
 ```bash
+git clone https://github.com/zuedev/zls.git
+cd zls
 cargo install --path .
+```
+
+### Using Docker
+
+```bash
+# Build the image
+docker build -t zls .
+
+# Run zls in a container
+docker run --rm -v $(pwd):/data zls /data
+```
+
+### From GitHub Container Registry
+
+```bash
+docker pull ghcr.io/zuedev/zls:main
+docker run --rm -v $(pwd):/data ghcr.io/zuedev/zls:main /data
 ```
 
 ## Usage
 
 ```bash
 zls [OPTIONS] [PATH]
-
-OPTIONS:
-    -a, --all       Show hidden files
-    -s, --short     Use short listing format
-    -t, --time      Sort by modification time
-    -H, --human     Show human readable sizes
 ```
+
+### Options
+
+| Flag | Long Form   | Description                                   |
+| ---- | ----------- | --------------------------------------------- |
+| `-a` | `--all`     | Show hidden files (starting with `.`)         |
+| `-s` | `--short`   | Use compact listing format with column layout |
+| `-t` | `--time`    | Sort by modification time (newest first)      |
+| `-H` | `--human`   | Show human-readable sizes (default: enabled)  |
+|      | `--bytes`   | Show raw byte sizes instead of human-readable |
+| `-h` | `--help`    | Print help information                        |
+| `-V` | `--version` | Print version information                     |
+
+### Examples
+
+```bash
+# List current directory (detailed view)
+zls
+
+# List with hidden files
+zls -a
+
+# Compact view sorted by modification time
+zls -st
+
+# Show raw byte sizes
+zls --bytes
+
+# List specific directory
+zls /usr/local/bin
+```
+
+## Output Formats
+
+### Detailed View (Default)
+
+```
+d      4.1K Dec 25 10:30 src/
+-      1.2K Dec 25 10:25 Cargo.toml
+-      8.5K Dec 25 10:29 main.rs
+```
+
+Format: `[type] [size] [modified] [name]`
+
+- **Type**: `d` for directory, `-` for file
+- **Size**: Human-readable by default (B/K/M/G/T)
+- **Modified**: `MMM DD HH:MM` format
+- **Name**: Color-coded by file type
+
+### Short View (`-s`)
+
+```
+src/  Cargo.toml  main.rs  target/  README.md
+```
+
+Responsive column layout that adapts to terminal width.
+
+## Performance
+
+zls uses parallel processing via Rayon to read directory entries concurrently, making it significantly faster than traditional `ls` for directories with many files. The performance improvement is most noticeable with:
+
+- Large directories (100+ files)
+- Network-mounted filesystems
+- Directories with mixed file types
+
+## Development
+
+### Running Tests
+
+```bash
+cargo test
+```
+
+### Building
+
+```bash
+# Debug build
+cargo build
+
+# Release build
+cargo build --release
+```
+
+### Code Coverage
+
+The project includes comprehensive unit tests covering:
+
+- Size formatting (human-readable and raw bytes)
+- Time formatting and edge cases
+- File type detection (hidden files, directories)
+- Size conversion edge cases
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Dependencies
+
+- **clap** (4.0+) - Command-line argument parsing
+- **crossterm** (0.27) - Cross-platform terminal manipulation and colors
+- **rayon** (1.7) - Data parallelism library
+- **chrono** (0.4) - Date and time handling
+
+## License
+
+This project is open source and dedicated to the public domain under the [Unlicense](LICENSE).
+
+## Acknowledgments
+
+- Inspired by modern CLI tools like [`exa`](https://github.com/ogham/exa) and [`lsd`](https://github.com/lsd-rs/lsd)
+- Built with the Rust ecosystem's excellent crates
+- Optimized for developer workflow and terminal aesthetics
