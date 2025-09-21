@@ -6,16 +6,16 @@
 
 ## Features
 
-- 🚀 **Parallel Processing** - Leverages Rayon for concurrent directory reading and improved performance
+- 🚀 **[Parallel Processing](src/main.rs#L112-L118)** - Leverages Rayon for concurrent directory reading and improved performance
 - 🎨 **Colorized Output** - Visual file type indicators with syntax highlighting
-  - 📁 Directories (blue, bold)
-  - 🦀 Rust files (yellow)
-  - 👻 Hidden files (dark grey)
-- 📊 **Detailed View by Default** - Long format displaying file size, modification time, and type
-- 📏 **Smart Size Formatting** - Human-readable sizes (B/K/M/G/T) by default, with raw bytes option
-- 🕒 **Flexible Sorting** - Sort by name (default) or modification time
-- 👁️ **Hidden File Support** - Show/hide dotfiles with `-a` flag
-- 📱 **Responsive Layout** - Adapts short format to terminal width
+  - 📁 [Directories (blue, bold)](src/main.rs#L148-L149)
+  - 🦀 [Rust files (yellow)](src/main.rs#L150-L151)
+  - 👻 [Hidden files (dark grey)](src/main.rs#L152-L153)
+- 📊 **[Detailed View by Default](src/main.rs#L142-L159)** - Long format displaying file size, modification time, and type
+- 📏 **[Smart Size Formatting](src/main.rs#L78-L97)** - Human-readable sizes (B/K/M/G/T) by default, with raw bytes option
+- 🕒 **[Flexible Sorting](src/main.rs#L126-L134)** - Sort by name (default) or modification time
+- 👁️ **[Hidden File Support](src/main.rs#L122-L124)** - Show/hide dotfiles with `-a` flag
+- 📱 **[Responsive Layout](src/main.rs#L178-L184)** - Adapts short format to terminal width
 - 🖥️ **Cross-Platform** - Works on Linux, macOS, and Windows
 
 ## Installation
