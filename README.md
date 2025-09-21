@@ -6,12 +6,12 @@
 
 ## Features
 
-- 🚀 **Fast directory listings** - Parallel processing for improved performance ([`src/main.rs:108`](src/main.rs#L108))
-- 🎨 **Colorized output** - File type indicators and syntax highlighting ([`src/main.rs:143-151`](src/main.rs#L143-L151), [`src/main.rs:158-169`](src/main.rs#L158-L169))
-- 📋 **Detailed by default** - Long format with file sizes and timestamps ([`src/main.rs:137-154`](src/main.rs#L137-L154))
-- 🔍 **Flexible sorting** - Sort by name or modification time ([`src/main.rs:121-129`](src/main.rs#L121-L129))
-- 👁️ **Hidden file support** - Show/hide dotfiles with `-a` flag ([`src/main.rs:117-119`](src/main.rs#L117-L119))
-- 📏 **Human-readable sizes** - Convert bytes to KB/MB/GB with `-H` flag ([`src/main.rs:73-92`](src/main.rs#L73-L92))
+- 🚀 **Fast directory listings** - Parallel processing for improved performance ([`src/main.rs:113`](src/main.rs#L113))
+- 🎨 **Colorized output** - File type indicators and syntax highlighting ([`src/main.rs:148-156`](src/main.rs#L148-L156), [`src/main.rs:163-174`](src/main.rs#L163-L174))
+- 📋 **Detailed by default** - Long format with file sizes and timestamps ([`src/main.rs:142-159`](src/main.rs#L142-L159))
+- 🔍 **Flexible sorting** - Sort by name or modification time ([`src/main.rs:126-134`](src/main.rs#L126-L134))
+- 👁️ **Hidden file support** - Show/hide dotfiles with `-a` flag ([`src/main.rs:122-124`](src/main.rs#L122-L124))
+- 📏 **Human-readable sizes** - Convert bytes to KB/MB/GB with `-H` flag ([`src/main.rs:78-97`](src/main.rs#L78-L97))
 - 🖥️ **Cross-platform** - Linux, macOS, and Windows support
 
 ## Installation
