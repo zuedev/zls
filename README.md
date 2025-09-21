@@ -6,12 +6,12 @@
 
 ## Features
 
-- 🚀 **Fast directory listings** - Parallel processing for improved performance
-- 🎨 **Colorized output** - File type indicators and syntax highlighting
-- 📋 **Detailed by default** - Long format with file sizes and timestamps
-- 🔍 **Flexible sorting** - Sort by name or modification time
-- 👁️ **Hidden file support** - Show/hide dotfiles with `-a` flag
-- 📏 **Human-readable sizes** - Convert bytes to KB/MB/GB with `-H` flag
+- 🚀 **Fast directory listings** - Parallel processing for improved performance ([`src/main.rs:108`](src/main.rs#L108))
+- 🎨 **Colorized output** - File type indicators and syntax highlighting ([`src/main.rs:143-151`](src/main.rs#L143-L151), [`src/main.rs:158-169`](src/main.rs#L158-L169))
+- 📋 **Detailed by default** - Long format with file sizes and timestamps ([`src/main.rs:137-154`](src/main.rs#L137-L154))
+- 🔍 **Flexible sorting** - Sort by name or modification time ([`src/main.rs:121-129`](src/main.rs#L121-L129))
+- 👁️ **Hidden file support** - Show/hide dotfiles with `-a` flag ([`src/main.rs:117-119`](src/main.rs#L117-L119))
+- 📏 **Human-readable sizes** - Convert bytes to KB/MB/GB with `-H` flag ([`src/main.rs:73-92`](src/main.rs#L73-L92))
 - 🖥️ **Cross-platform** - Linux, macOS, and Windows support
 
 ## Installation
