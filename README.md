@@ -8,10 +8,10 @@
 
 - 🚀 **Fast directory listings** - Parallel processing for improved performance
 - 🎨 **Colorized output** - File type indicators and syntax highlighting
-- 📋 **Multiple display modes** - Short and long format options
+- 📋 **Detailed by default** - Long format with file sizes and timestamps
 - 🔍 **Flexible sorting** - Sort by name or modification time
 - 👁️ **Hidden file support** - Show/hide dotfiles with `-a` flag
-- 📏 **Human-readable sizes** - Convert bytes to KB/MB/GB with `-h` flag
+- 📏 **Human-readable sizes** - Convert bytes to KB/MB/GB with `-H` flag
 - 🖥️ **Cross-platform** - Linux, macOS, and Windows support
 
 ## Installation
@@ -29,7 +29,7 @@ zls [OPTIONS] [PATH]
 
 OPTIONS:
     -a, --all       Show hidden files
-    -l, --long      Use long listing format
+    -s, --short     Use short listing format
     -t, --time      Sort by modification time
     -H, --human     Show human readable sizes
 ```

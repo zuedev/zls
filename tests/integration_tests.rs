@@ -28,7 +28,7 @@ fn test_zls_help() {
 
     assert!(stdout.contains("A fast ls replacement written in Rust"));
     assert!(stdout.contains("--all"));
-    assert!(stdout.contains("--long"));
+    assert!(stdout.contains("--short"));
     assert!(stdout.contains("--time"));
     assert!(stdout.contains("--human"));
 }
@@ -78,15 +78,27 @@ fn test_zls_with_flags() {
     assert!(stdout.contains("subdir"));
     assert!(stdout.contains(".hidden"));
 
-    // Test with --long flag
+    // Test with --short flag (original behavior is now default, so test short)
     let output = Command::new("cargo")
-        .args(&["run", "--", "--long", dir.path().to_str().unwrap()])
+        .args(&["run", "--", "--short", dir.path().to_str().unwrap()])
         .output()
-        .expect("Failed to execute zls --long");
+        .expect("Failed to execute zls --short");
 
     assert!(output.status.success());
     let stdout = String::from_utf8_lossy(&output.stdout);
-    // Long format should include size and timestamp
+    // Short format should be more compact
+    assert!(stdout.contains("file1.txt"));
+    assert!(stdout.contains("subdir"));
+
+    // Test default behavior (now long format)
+    let output = Command::new("cargo")
+        .args(&["run", "--", dir.path().to_str().unwrap()])
+        .output()
+        .expect("Failed to execute zls (default)");
+
+    assert!(output.status.success());
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    // Default (long) format should include size and timestamp
     assert!(stdout.contains("file1.txt"));
     // Should have directory indicator
     assert!(stdout.contains("d") || stdout.contains("-"));
@@ -101,9 +113,9 @@ fn test_zls_human_readable_sizes() {
     fs::write(dir.path().join("large_file.txt"), &large_content).expect("Failed to create large file");
 
     let output = Command::new("cargo")
-        .args(&["run", "--", "--long", "-H", dir.path().to_str().unwrap()])
+        .args(&["run", "--", "-H", dir.path().to_str().unwrap()])
         .output()
-        .expect("Failed to execute zls --long -H");
+        .expect("Failed to execute zls -H");
 
     assert!(output.status.success());
     let stdout = String::from_utf8_lossy(&output.stdout);

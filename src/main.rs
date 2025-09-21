@@ -21,8 +21,8 @@ struct Args {
     #[arg(short, long, help = "Show hidden files")]
     all: bool,
 
-    #[arg(short, long, help = "Use long listing format")]
-    long: bool,
+    #[arg(short, long, help = "Use short listing format")]
+    short: bool,
 
     #[arg(short, long, help = "Sort by modification time")]
     time: bool,
@@ -131,7 +131,7 @@ fn list_directory(path: &Path, args: &Args) -> Result<Vec<FileInfo>, std::io::Er
 fn print_entries(entries: &[FileInfo], args: &Args) {
     let term_width = terminal::size().map(|(w, _)| w as usize).unwrap_or(80);
 
-    if args.long {
+    if !args.short {
         for entry in entries {
             let size_str = format_size(entry.size, args.human);
             let time_str = format_time(entry.modified);
