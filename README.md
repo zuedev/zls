@@ -1,3 +1,7 @@
+> [!WARNING]  
+> **This project is currently under heavy development and is not yet ready for production use.**  
+> The API and implementation may change frequently. Use with caution in non-production environments.
+
 # zls
 
 > ⚡ A blazingly fast `ls` replacement written in Rust
@@ -136,6 +140,7 @@ cargo bench sorting
 ```
 
 The benchmark suite includes:
+
 - **Size formatting** - Performance comparison between human-readable and raw byte formatting
 - **Time formatting** - Date/time string formatting performance
 - **File info creation** - FileInfo struct creation from filesystem metadata
