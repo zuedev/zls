@@ -92,8 +92,8 @@ fn format_time(time: Option<SystemTime>) -> String {
     match time {
         Some(t) => {
             let duration = t.duration_since(SystemTime::UNIX_EPOCH).unwrap_or_default();
-            let datetime = chrono::DateTime::from_timestamp(duration.as_secs() as i64, 0)
-                .unwrap_or_default();
+            let datetime =
+                chrono::DateTime::from_timestamp(duration.as_secs() as i64, 0).unwrap_or_default();
             datetime.format("%b %d %H:%M").to_string()
         }
         None => "???".to_string(),
@@ -153,7 +153,10 @@ fn print_entries(entries: &[FileInfo], args: &Args) {
         let mut current_width = 0;
         for (i, entry) in entries.iter().enumerate() {
             let name = if entry.is_dir {
-                format!("{}/", entry.name).with(Color::Blue).bold().to_string()
+                format!("{}/", entry.name)
+                    .with(Color::Blue)
+                    .bold()
+                    .to_string()
             } else if entry.name.ends_with(".rs") {
                 entry.name.clone().with(Color::Yellow).to_string()
             } else if entry.name.starts_with('.') {

@@ -1,5 +1,5 @@
-use std::process::Command;
 use std::fs;
+use std::process::Command;
 use tempfile::tempdir;
 
 #[test]
@@ -110,7 +110,8 @@ fn test_zls_human_readable_sizes() {
 
     // Create a file with known size
     let large_content = "x".repeat(2048); // 2KB
-    fs::write(dir.path().join("large_file.txt"), &large_content).expect("Failed to create large file");
+    fs::write(dir.path().join("large_file.txt"), &large_content)
+        .expect("Failed to create large file");
 
     let output = Command::new("cargo")
         .args(&["run", "--", "-H", dir.path().to_str().unwrap()])
