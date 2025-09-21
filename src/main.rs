@@ -27,8 +27,11 @@ struct Args {
     #[arg(short, long, help = "Sort by modification time")]
     time: bool,
 
-    #[arg(short = 'H', long, help = "Show human readable sizes")]
+    #[arg(short = 'H', long, help = "Show human readable sizes", default_value_t = true)]
     human: bool,
+
+    #[arg(long, help = "Show raw byte sizes instead of human readable")]
+    bytes: bool,
 }
 
 #[derive(Debug)]
@@ -133,7 +136,7 @@ fn print_entries(entries: &[FileInfo], args: &Args) {
 
     if !args.short {
         for entry in entries {
-            let size_str = format_size(entry.size, args.human);
+            let size_str = format_size(entry.size, args.human && !args.bytes);
             let time_str = format_time(entry.modified);
             let type_char = if entry.is_dir { "d" } else { "-" };
 
