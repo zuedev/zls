@@ -6,6 +6,9 @@ WORKDIR /app
 COPY Cargo.toml ./
 COPY src/ src/
 
+# Remove benchmark configuration from Cargo.toml for Docker build
+RUN sed -i '/\[\[bench\]\]/,$d' Cargo.toml
+
 # Build the application
 RUN cargo build --release
 
