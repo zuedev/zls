@@ -123,6 +123,27 @@ zls uses parallel processing via Rayon to read directory entries concurrently, m
 cargo test
 ```
 
+### Running Benchmarks
+
+```bash
+# Run all benchmarks
+cargo bench
+
+# Run specific benchmark group
+cargo bench format_size
+cargo bench directory_reading
+cargo bench sorting
+```
+
+The benchmark suite includes:
+- **Size formatting** - Performance comparison between human-readable and raw byte formatting
+- **Time formatting** - Date/time string formatting performance
+- **File info creation** - FileInfo struct creation from filesystem metadata
+- **Directory reading** - Sequential vs parallel directory processing comparison
+- **Sorting** - Name vs modification time sorting performance
+
+Benchmark results are saved to `target/criterion/` with detailed HTML reports.
+
 ### Building
 
 ```bash
