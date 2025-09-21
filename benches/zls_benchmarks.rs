@@ -1,4 +1,4 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::fs;
 use std::path::PathBuf;
 use std::time::SystemTime;
@@ -111,23 +111,19 @@ fn bench_format_size(c: &mut Criterion) {
         1023,
         1024,
         1536,
-        1048576,      // 1 MB
-        1073741824,   // 1 GB
+        1048576,       // 1 MB
+        1073741824,    // 1 GB
         1099511627776, // 1 TB
     ];
 
     for size in sizes {
-        group.bench_with_input(
-            BenchmarkId::new("human_readable", size),
-            &size,
-            |b, &s| b.iter(|| format_size(black_box(s), black_box(true)))
-        );
+        group.bench_with_input(BenchmarkId::new("human_readable", size), &size, |b, &s| {
+            b.iter(|| format_size(black_box(s), black_box(true)))
+        });
 
-        group.bench_with_input(
-            BenchmarkId::new("raw_bytes", size),
-            &size,
-            |b, &s| b.iter(|| format_size(black_box(s), black_box(false)))
-        );
+        group.bench_with_input(BenchmarkId::new("raw_bytes", size), &size, |b, &s| {
+            b.iter(|| format_size(black_box(s), black_box(false)))
+        });
     }
 
     group.finish();
@@ -144,11 +140,9 @@ fn bench_format_time(c: &mut Criterion) {
     ];
 
     for (i, time) in times.into_iter().enumerate() {
-        group.bench_with_input(
-            BenchmarkId::new("format_time", i),
-            &time,
-            |b, t| b.iter(|| format_time(black_box(*t)))
-        );
+        group.bench_with_input(BenchmarkId::new("format_time", i), &time, |b, t| {
+            b.iter(|| format_time(black_box(*t)))
+        });
     }
 
     group.finish();
@@ -175,7 +169,8 @@ fn bench_file_info_creation(c: &mut Criterion) {
 
     group.bench_function("batch_files", |b| {
         b.iter(|| {
-            paths.iter()
+            paths
+                .iter()
                 .map(|p| FileInfo::from_path(black_box(p.clone())))
                 .collect::<Result<Vec<_>, _>>()
                 .ok()
@@ -207,7 +202,7 @@ fn bench_directory_reading(c: &mut Criterion) {
                         .collect();
                     entries.ok()
                 })
-            }
+            },
         );
 
         group.bench_with_input(
@@ -226,7 +221,7 @@ fn bench_directory_reading(c: &mut Criterion) {
                         .collect();
                     entries.ok()
                 })
-            }
+            },
         );
     }
 
