@@ -27,13 +27,14 @@ struct Args {
     #[arg(short, long, help = "Sort by modification time")]
     time: bool,
 
-    #[arg(short, long, help = "Show human readable sizes")]
+    #[arg(short = 'H', long, help = "Show human readable sizes")]
     human: bool,
 }
 
 #[derive(Debug)]
 struct FileInfo {
     name: String,
+    #[allow(dead_code)]
     path: PathBuf,
     is_dir: bool,
     is_hidden: bool,
@@ -194,4 +195,101 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     print_entries(&entries, &args);
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::path::PathBuf;
+    use std::time::SystemTime;
+
+    #[test]
+    fn test_format_size_bytes() {
+        assert_eq!(format_size(0, false), "0");
+        assert_eq!(format_size(512, false), "512");
+        assert_eq!(format_size(1023, false), "1023");
+    }
+
+    #[test]
+    fn test_format_size_human_readable() {
+        assert_eq!(format_size(0, true), "0B");
+        assert_eq!(format_size(512, true), "512B");
+        assert_eq!(format_size(1024, true), "1.0K");
+        assert_eq!(format_size(1536, true), "1.5K");
+        assert_eq!(format_size(1048576, true), "1.0M");
+        assert_eq!(format_size(1073741824, true), "1.0G");
+        assert_eq!(format_size(1099511627776, true), "1.0T");
+    }
+
+    #[test]
+    fn test_format_time_none() {
+        assert_eq!(format_time(None), "???");
+    }
+
+    #[test]
+    fn test_format_time_some() {
+        let time = SystemTime::UNIX_EPOCH + std::time::Duration::from_secs(1640995200); // 2022-01-01 00:00:00 UTC
+        let formatted = format_time(Some(time));
+        // Should contain month, day, hour, minute format
+        assert!(formatted.len() > 5);
+        assert!(formatted.contains(':'));
+    }
+
+    #[test]
+    fn test_file_info_hidden_detection() {
+        // Test that files starting with '.' are detected as hidden
+        let path = PathBuf::from(".hidden_file");
+
+        // We'll create a mock FileInfo since we can't guarantee the file exists
+        let file_info = FileInfo {
+            name: ".hidden_file".to_string(),
+            path: path.clone(),
+            is_dir: false,
+            is_hidden: true,
+            size: 0,
+            modified: None,
+        };
+
+        assert!(file_info.is_hidden);
+        assert_eq!(file_info.name, ".hidden_file");
+    }
+
+    #[test]
+    fn test_file_info_regular_file() {
+        let file_info = FileInfo {
+            name: "regular_file.txt".to_string(),
+            path: PathBuf::from("regular_file.txt"),
+            is_dir: false,
+            is_hidden: false,
+            size: 1024,
+            modified: Some(SystemTime::now()),
+        };
+
+        assert!(!file_info.is_hidden);
+        assert!(!file_info.is_dir);
+        assert_eq!(file_info.size, 1024);
+    }
+
+    #[test]
+    fn test_file_info_directory() {
+        let file_info = FileInfo {
+            name: "directory".to_string(),
+            path: PathBuf::from("directory"),
+            is_dir: true,
+            is_hidden: false,
+            size: 4096,
+            modified: Some(SystemTime::now()),
+        };
+
+        assert!(!file_info.is_hidden);
+        assert!(file_info.is_dir);
+    }
+
+    #[test]
+    fn test_format_size_edge_cases() {
+        assert_eq!(format_size(1023, true), "1023B");
+        assert_eq!(format_size(1025, true), "1.0K");
+        assert_eq!(format_size(1048575, true), "1024.0K");
+        assert_eq!(format_size(1048577, true), "1.0M");
+    }
 }

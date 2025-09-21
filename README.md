@@ -31,5 +31,5 @@ OPTIONS:
     -a, --all       Show hidden files
     -l, --long      Use long listing format
     -t, --time      Sort by modification time
-    -h, --human     Show human readable sizes
+    -H, --human     Show human readable sizes
 ```
