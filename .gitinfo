@@ -1,0 +1,12 @@
+{
+  "$schema": "https://git.zue.dev/gitinfo/plain/gitinfo.schema.json",
+  "root": "https://github.com/zuedev/zls",
+  "description": "⚡ A blazingly fast ls replacement written in Rust with parallel processing and colorized output",
+  "maintainers": [
+    [
+      "Alex (@zuedev)",
+      "zuedev@gmail.com"
+    ]
+  ],
+  "license": "Unlicense"
+}
